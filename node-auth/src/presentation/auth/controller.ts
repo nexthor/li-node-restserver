@@ -1,13 +1,17 @@
 import { Request, Response } from 'express';
+import { RegisterDto } from '../../domain';
 
 export class AuthController {
     constructor() {}
 
-    registerUser = async(req: Request, res: Response) => {
-        res.json({ message: 'Register AuthController' });
+    registerUser = (req: Request, res: Response) => {
+        const [error, registerDto] = RegisterDto.create(req.body);
+        if (error) res.status(400).json({ message: error });
+
+        res.json(registerDto);
     }
 
-    loginUser = async(req: Request, res: Response) => {
+    loginUser = (req: Request, res: Response) => {
         res.json({ message: 'Login AuthController' });
     }
 }

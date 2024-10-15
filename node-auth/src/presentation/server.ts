@@ -17,6 +17,10 @@ export class Server {
     }
 
     async start() {
+        // middlewares
+        this.app.use(express.json());
+        this.app.use(express.urlencoded({ extended: true })); // para recibir datos de formularios
+
         // usar las rutas definidas en AppRoutes
         this.app.use(this.routes);
 
